@@ -1,0 +1,37 @@
+(set-logic HORN)
+(set-info :source |
+Author: Frank Schuessele <schuessf@informatik.uni-freiburg.de>
+Date: 2022-02-28
+Generated from SV-COMP example pthread-ext/05_tas.c using Ultimate(using some simplification)
+|)
+
+(declare-fun Inv (Int Int Int Int Int Int Int) Bool)
+
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (=> (Inv lock c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2) (Inv lock c loc_main_1 loc_thread_2 cond_2 loc_thread_1 cond_1))))
+(assert (forall ((lock Int) (c Int) (cond_1 Int) (cond_2 Int)) (Inv lock c 0 (- 1) cond_1 (- 1) cond_2)))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (not (Inv lock c loc_main_1 0 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (lock_1 Int)) (=> (Inv lock c 0 loc_thread_1 cond_1 loc_thread_2 cond_2) (= lock_1 0) (Inv lock_1 c 1 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (c_1 Int)) (=> (Inv lock c 1 loc_thread_1 cond_1 loc_thread_2 cond_2) (= c_1 0) (Inv lock c_1 2 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (=> (Inv lock c 2 (- 1) cond_1 loc_thread_2 cond_2) (Inv lock c 2 1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (let ((.cse0 (Inv lock c 2 loc_thread_1 cond_1 loc_thread_2 cond_2))) (=> .cse0 .cse0))))
+(assert (forall ((lock Int) (c Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (=> (Inv lock c 2 loc_thread_1 cond_1 loc_thread_2 cond_2) (Inv lock c 3 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock_8 Int) (c Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (cond_5 Int) (lock_7 Int)) (=> (Inv lock_8 c loc_main_1 1 cond_1 loc_thread_2 cond_2) (and (= cond_5 lock_8) (= lock_7 1)) (Inv lock_7 c loc_main_1 3 cond_5 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (cond_2 Int) (loc_thread_2 Int)) (=> (Inv lock c loc_main_1 3 cond_2 loc_thread_2 cond_2) (= cond_2 1) (Inv lock c loc_main_1 4 cond_2 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (cond_4 Int) (loc_thread_2 Int) (cond_2 Int)) (=> (Inv lock c loc_main_1 3 cond_4 loc_thread_2 cond_2) (not (= cond_4 1)) (Inv lock c loc_main_1 5 cond_4 loc_thread_2 cond_2))))
+(assert (forall ((lock_12 Int) (c Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (cond_7 Int) (lock_11 Int)) (=> (Inv lock_12 c loc_main_1 4 cond_1 loc_thread_2 cond_2) (and (= lock_11 1) (= lock_12 cond_7)) (Inv lock_11 c loc_main_1 3 cond_7 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c_3 Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (c_2 Int)) (=> (Inv lock c_3 loc_main_1 5 cond_1 loc_thread_2 cond_2) (= c_2 (+ c_3 1)) (Inv lock c_2 loc_main_1 6 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c_4 Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (=> (Inv lock c_4 loc_main_1 6 cond_1 loc_thread_2 cond_2) (not (= c_4 1)) (Inv lock c_4 loc_main_1 0 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c_5 Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (=> (Inv lock c_5 loc_main_1 6 cond_1 loc_thread_2 cond_2) (= c_5 1) (Inv lock c_5 loc_main_1 7 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c_7 Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (c_6 Int)) (=> (Inv lock c_7 loc_main_1 7 cond_1 loc_thread_2 cond_2) (= c_6 (+ (- 1) c_7)) (Inv lock c_6 loc_main_1 8 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (lock_6 Int)) (=> (Inv lock c loc_main_1 8 cond_1 loc_thread_2 cond_2) (= lock_6 0) (Inv lock_6 c loc_main_1 1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock_8 Int) (c Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (cond_5 Int) (lock_7 Int)) (=> (Inv lock_8 c loc_main_1 1 cond_1 loc_thread_2 cond_2) (Inv lock_8 c loc_main_1 loc_thread_1 cond_1 1 cond_2) (Inv lock_8 c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2) (and (= cond_5 lock_8) (= lock_7 1)) (Inv lock_7 c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (let ((.cse0 (Inv lock c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))) (=> (Inv lock c loc_main_1 3 cond_2 loc_thread_2 cond_2) (Inv lock c loc_main_1 loc_thread_1 cond_1 3 cond_2) .cse0 (= cond_2 1) .cse0))))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (cond_4 Int)) (let ((.cse0 (Inv lock c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))) (=> (Inv lock c loc_main_1 3 cond_4 loc_thread_2 cond_2) (Inv lock c loc_main_1 loc_thread_1 cond_1 3 cond_4) .cse0 (not (= cond_4 1)) .cse0))))
+(assert (forall ((lock_12 Int) (c Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (cond_7 Int) (lock_11 Int)) (=> (Inv lock_12 c loc_main_1 4 cond_1 loc_thread_2 cond_2) (Inv lock_12 c loc_main_1 loc_thread_1 cond_1 4 cond_2) (Inv lock_12 c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2) (and (= lock_11 1) (= lock_12 cond_7)) (Inv lock_11 c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c_3 Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (c_2 Int)) (=> (Inv lock c_3 loc_main_1 5 cond_1 loc_thread_2 cond_2) (Inv lock c_3 loc_main_1 loc_thread_1 cond_1 5 cond_2) (Inv lock c_3 loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2) (= c_2 (+ c_3 1)) (Inv lock c_2 loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c_4 Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (let ((.cse0 (Inv lock c_4 loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))) (=> (Inv lock c_4 loc_main_1 6 cond_1 loc_thread_2 cond_2) (Inv lock c_4 loc_main_1 loc_thread_1 cond_1 6 cond_2) .cse0 (not (= c_4 1)) .cse0))))
+(assert (forall ((lock Int) (c_5 Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int)) (let ((.cse0 (Inv lock c_5 loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))) (=> (Inv lock c_5 loc_main_1 6 cond_1 loc_thread_2 cond_2) (Inv lock c_5 loc_main_1 loc_thread_1 cond_1 6 cond_2) .cse0 (= c_5 1) .cse0))))
+(assert (forall ((lock Int) (c_7 Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (c_6 Int)) (=> (Inv lock c_7 loc_main_1 7 cond_1 loc_thread_2 cond_2) (Inv lock c_7 loc_main_1 loc_thread_1 cond_1 7 cond_2) (Inv lock c_7 loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2) (= c_6 (+ (- 1) c_7)) (Inv lock c_6 loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+(assert (forall ((lock Int) (c Int) (loc_main_1 Int) (loc_thread_1 Int) (cond_1 Int) (loc_thread_2 Int) (cond_2 Int) (lock_6 Int)) (=> (Inv lock c loc_main_1 8 cond_1 loc_thread_2 cond_2) (Inv lock c loc_main_1 loc_thread_1 cond_1 8 cond_2) (Inv lock c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2) (= lock_6 0) (Inv lock_6 c loc_main_1 loc_thread_1 cond_1 loc_thread_2 cond_2))))
+
+(check-sat)
