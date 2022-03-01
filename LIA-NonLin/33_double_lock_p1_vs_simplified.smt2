@@ -2,7 +2,7 @@
 (set-info :source |
 Author: Frank Schuessele <schuessf@informatik.uni-freiburg.de>
 Date: 2022-02-28
-Generated from SV-COMP example pthread-ext/33_double_lock_p1_vs.c using Ultimate(using some simplification)
+Generated from a simplified version of SV-COMP example pthread-ext/33_double_lock_p1_vs.c using Ultimate
 |)
 
 (declare-fun Inv (Int Int Int Int Int Int Int Int) Bool)
